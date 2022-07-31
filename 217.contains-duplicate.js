@@ -10,13 +10,15 @@
  * @return {boolean}
  */
 var containsDuplicate = function (nums) {
-  for (let i in nums) {
-    if (Number(i) + 1 <= nums.length && nums.includes(nums[i], Number(i) + 1)) {
+  const distinct = new Set();
+  for (let value of nums) {
+    if (distinct.has(value)) {
       return true;
     }
+    distinct.add(value);
   }
   return false;
 };
 // @lc code=end
 
-console.log(containsDuplicate([2, 14, 18, 22, 22]));
+console.log(containsDuplicate([2, 14, 18, 22]));
