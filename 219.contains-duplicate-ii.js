@@ -11,14 +11,13 @@
  * @return {boolean}
  */
 var containsNearbyDuplicate = function (nums, k) {
-  const tempObj = {};
+  const map = new Map();
   for (let i in nums) {
-    if (nums[i] !== undefined && Math.abs(tempObj[nums[i]] - i) <= k) {
-      return true;
-    }
-    tempObj[nums[i]] = i;
+    if (i - map.get(nums[i]) <= k) return true;
+    if (i > k) map.delete(nums[i - k + 1]);
+    map.set(nums[i], i);
   }
   return false;
 };
 // @lc code=end
-console.log(containsNearbyDuplicate([1, 2, 3, 1, 2, 3], 2));
+console.log(containsNearbyDuplicate([1, 2, 3, 1], 3));
